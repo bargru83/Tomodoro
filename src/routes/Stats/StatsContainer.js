@@ -4,7 +4,9 @@ import Stats from './Stats';
 export default class StatsContainer extends Component {
   render() {
     return (
-      <Stats />
+      <Stats
+        statsToFocus={this.props.statsToFocus}
+      />
     );
   }
 }

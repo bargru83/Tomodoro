@@ -4,7 +4,10 @@ import Focus from './Focus';
 export default class FocusContainer extends Component {
   render() {
     return (
-      <Focus />
+      <Focus
+        focusToSettings={this.props.focusToSettings}
+        focusToStats={this.props.focusToStats}
+      />
     );
   }
 }

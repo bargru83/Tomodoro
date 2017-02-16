@@ -4,7 +4,9 @@ import Settings from './Settings';
 export default class SettingsContainer extends Component {
   render() {
     return (
-      <Settings />
+      <Settings
+        settingsToFocus={this.props.settingsToFocus}
+      />
     );
   }
 }
