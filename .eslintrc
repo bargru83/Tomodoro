@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "globals"   : {
+    "describe"   : false,
+    "it"         : false,
+    "before"     : false,
+    "beforeEach" : false,
+    "after"      : false,
+    "afterEach"  : false,
+
+
+    /*shelljs*/
+    "exec": false,
+    "exit": false
+  },
+  "rules": {
+    "strict": "off",
+  }
+}
