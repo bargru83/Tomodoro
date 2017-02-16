@@ -4,7 +4,7 @@ import FocusContainer from '../Focus/FocusContainer';
 import SettingsContainer from '../Settings/SettingsContainer';
 import StatsContainer from '../Stats/StatsContainer';
 
-const styles=StyleSheet.create({
+const styles = StyleSheet.create({
   view: {
     backgroundColor: 'skyblue',
   },
@@ -41,13 +41,15 @@ export default class App extends Component {
         settingsToFocus={() => {
           navigator.pop();
         }}
+        sceneTitle={'Settings'}
       />;
     } else if (route.stats) {
       return <StatsContainer
         statsToFocus={() => {
           navigator.pop();
         }}
-      />
+        sceneTitle={'Stats'}
+      />;
     }
   }
 
