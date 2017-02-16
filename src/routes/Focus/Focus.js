@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Text, TouchableHighlight, View, StyleSheet } from 'react-native';
 import Timer from '../../components/Timer';
 import Button from '../../components/Button';
+import SceneTitle from '../../components/SceneTitle';
+import OptionsButton from '../../components/OptionsButton';
 
 const { func, string } = PropTypes;
 
@@ -37,11 +39,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  sceneTitle: {
-    color: 'white',
-    fontSize: 20,
-    textAlign: 'center',
-  },
 });
 
 export default class Focus extends Component {
@@ -56,9 +53,7 @@ export default class Focus extends Component {
       <View style={styles.sceneWrapper}>
 
         <View style={styles.sceneTitleWrapper}>
-          <Text style={styles.sceneTitle}>
-            {this.props.sceneTitle}
-          </Text>
+          <SceneTitle sceneTitle={this.props.sceneTitle} />
         </View>
 
         <Timer
@@ -68,23 +63,18 @@ export default class Focus extends Component {
           title={'Start Session'}
         />
         <View style={styles.optionButtonsWrapper}>
-          <TouchableHighlight
+          <OptionsButton
             onPress={this.props.focusToSettings}
-            underlayColor={'deepskyblue'}
-          >
-            <Text style={styles.optionButton}>
-              {'< '}Settings
-            </Text>
-          </TouchableHighlight>
+            label={'Settings'}
+            side={'left'}
+          />
 
-          <TouchableHighlight
+          <OptionsButton
             onPress={this.props.focusToStats}
-            underlayColor={'deepskyblue'}
-          >
-            <Text style={styles.optionButton}>
-              Stats{' >'}
-            </Text>
-          </TouchableHighlight>
+            label={'Stats'}
+            side={'right'}
+          />
+
         </View>
       </View >
     );
