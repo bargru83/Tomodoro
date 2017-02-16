@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native';
+import { Navigator, StyleSheet } from 'react-native';
 import FocusContainer from '../Focus/FocusContainer';
 import SettingsContainer from '../Settings/SettingsContainer';
 import StatsContainer from '../Stats/StatsContainer';
+
+const styles=StyleSheet.create({
+  view: {
+    backgroundColor: 'skyblue',
+  },
+});
 
 export default class App extends Component {
 
@@ -28,6 +34,7 @@ export default class App extends Component {
             stats: true,
           });
         }}
+        sceneTitle={'Focus'}
       />;
     } else if (route.settings) {
       return <SettingsContainer
@@ -47,6 +54,7 @@ export default class App extends Component {
   render() {
     return (
       <Navigator
+        style={styles.view}
         initialRoute={{ focus: true }}
         renderScene={this.renderScene}
         configureScene={this.configureScene}

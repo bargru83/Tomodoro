@@ -5,6 +5,7 @@ export default class FocusContainer extends Component {
   render() {
     return (
       <Focus
+        sceneTitle={this.props.sceneTitle}
         focusToSettings={this.props.focusToSettings}
         focusToStats={this.props.focusToStats}
       />
