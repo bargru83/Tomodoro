@@ -1,10 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import App from './App';
 
-export default class AppContainer extends Component {
+class AppContainer extends Component {
   render() {
     return (
       <App />
     );
   }
 }
+
+function mapStateToProps({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToProps)(AppContainer);

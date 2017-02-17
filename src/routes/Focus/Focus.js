@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Text, TouchableHighlight, View, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import Timer from '../../components/Timer';
 import Button from '../../components/Button';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
+import { startSession } from '../../reducers/app/app';
 
 const { func, string } = PropTypes;
 
@@ -41,11 +43,17 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Focus extends Component {
+class Focus extends Component {
   static propTypes = {
     focusToSettings: func,
     focusToStats: func,
     sceneTitle: string,
+  }
+
+  startSession = () => {
+    console.log('click');
+    console.log(this.props.app);
+    this.props.dispatch(startSession());
   }
 
   render() {
@@ -61,6 +69,7 @@ export default class Focus extends Component {
         />
         <Button
           title={'Start Session'}
+          onPress={this.startSession}
         />
         <View style={styles.optionButtonsWrapper}>
           <OptionsButton
@@ -80,3 +89,11 @@ export default class Focus extends Component {
     );
   }
 }
+
+function mapStateToThis({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToThis)(Focus);

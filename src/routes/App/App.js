@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navigator, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import FocusContainer from '../Focus/FocusContainer';
 import SettingsContainer from '../Settings/SettingsContainer';
 import StatsContainer from '../Stats/StatsContainer';
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class App extends Component {
+class App extends Component {
 
   configureScene = (route) => {
     if (route.settings) {
@@ -64,3 +65,11 @@ export default class App extends Component {
     );
   }
 }
+
+function mapStateToProps({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToProps)(App);

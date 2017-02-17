@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Focus from './Focus';
 
-export default class FocusContainer extends Component {
+class FocusContainer extends Component {
   render() {
     return (
       <Focus
@@ -12,3 +13,11 @@ export default class FocusContainer extends Component {
     );
   }
 }
+
+function mapStateToThis({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToThis)(FocusContainer);
