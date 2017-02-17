@@ -5,7 +5,6 @@ import Timer from '../../components/Timer';
 import Button from '../../components/Button';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
-import { startSession } from '../../reducers/app/app';
 
 const { func, string } = PropTypes;
 
@@ -44,16 +43,11 @@ const styles = StyleSheet.create({
 });
 
 class Focus extends Component {
+
   static propTypes = {
     focusToSettings: func,
     focusToStats: func,
     sceneTitle: string,
-  }
-
-  startSession = () => {
-    if (!this.props.app.sessionStarted) {
-      this.props.dispatch(startSession());
-    }
   }
 
   render() {
@@ -65,11 +59,11 @@ class Focus extends Component {
         </View>
 
         <Timer
-          timeRemaining={'00:00'}
+          timeRemaining={this.props.timeRemaining}
         />
         <Button
           title={'Start Session'}
-          onPress={this.startSession}
+          onPress={this.props.startSession}
         />
         <View style={styles.optionButtonsWrapper}>
           <OptionsButton
