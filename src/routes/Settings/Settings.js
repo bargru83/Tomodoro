@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
 import Slider from '../../components/Slider';
+import { durationChangeSession, durationChangeBreak } from '../../reducers/app/app';
 
 const styles = StyleSheet.create({
   sceneWrapper: {
@@ -30,7 +32,28 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Settings extends Component {
+class Settings extends Component {
+  state = {
+    sessionDuration: this.props.app.sessionDuration,
+    breakDuration: this.props.app.breakDuration,
+  };
+
+  sessionDurationChanging = (value) => {
+    this.setState({ sessionDuration: value });
+  }
+
+  sessionDurationChanged = (value) => {
+    this.props.dispatch(durationChangeSession(value));
+  }
+
+  breakDurationChanging = (value) => {
+    this.setState({ breakDuration: value });
+  }
+
+  breakDurationChanged = (value) => {
+    this.props.dispatch(durationChangeBreak(value));
+  }
+
   render() {
     return (
       <View style={styles.sceneWrapper}>
@@ -41,16 +64,24 @@ export default class Settings extends Component {
 
         <Slider
           label={'Session Duration'}
+          unit={'minute'}
           maxVal={60}
-          minVAl={0}
-          val={30}
+          minVal={1}
+          step={1}
+          val={this.state.sessionDuration}
+          onValueChange={this.sessionDurationChanging}
+          onSlidingComplete={this.sessionDurationChanged}
         />
 
         <Slider
           label={'Break Duration'}
+          unit={'minute'}
           maxVal={60}
-          minVal={0}
-          val={5}
+          minVal={1}
+          step={1}
+          val={this.state.breakDuration}
+          onValueChange={this.breakDurationChanging}
+          onSlidingComplete={this.breakDurationChanged}
         />
 
         <View style={styles.optionButtonsWrapper}>
@@ -64,3 +95,11 @@ export default class Settings extends Component {
     );
   }
 }
+
+function mapStateToThis({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToThis)(Settings);

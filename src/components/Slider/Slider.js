@@ -30,8 +30,11 @@ export default function Button(props) {
         maximumValue={props.maxVal}
         minimumValue={props.minVal}
         value={props.val}
+        step={props.step}
+        onValueChange={props.onValueChange}
+        onSlidingComplete={props.onSlidingComplete}
       />
-      <Text style={styles.output}>Output Placeholder</Text>
+      <Text style={styles.output}>{props.val} {props.unit}{props.val === 1 ? '' : 's'}</Text>
     </View>
   );
 }

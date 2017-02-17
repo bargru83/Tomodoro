@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Settings from './Settings';
 
-export default class SettingsContainer extends Component {
+class SettingsContainer extends Component {
   render() {
     return (
       <Settings
@@ -11,3 +12,11 @@ export default class SettingsContainer extends Component {
     );
   }
 }
+
+function mapStateToThis({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToThis)(SettingsContainer);

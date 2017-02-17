@@ -51,9 +51,9 @@ class Focus extends Component {
   }
 
   startSession = () => {
-    console.log('click');
-    console.log(this.props.app);
-    this.props.dispatch(startSession());
+    if (!this.props.app.sessionStarted) {
+      this.props.dispatch(startSession());
+    }
   }
 
   render() {
