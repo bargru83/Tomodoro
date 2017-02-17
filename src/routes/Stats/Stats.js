@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
+import Stat from '../../components/Stat';
 
 const styles = StyleSheet.create({
   sceneWrapper: {
@@ -37,6 +38,18 @@ export default class Settings extends Component {
         <View style={styles.sceneTitleWrapper}>
           <SceneTitle sceneTitle={this.props.sceneTitle} />
         </View>
+
+        <Stat 
+          label={'Sessions Completed'}
+        />
+
+        <Stat
+          label={'Session Time Completed'}
+        />
+
+        <Stat
+          label={'Sessions Cancelled'}
+        />
 
         <View style={styles.optionButtonsWrapper}>
           <OptionsButton
