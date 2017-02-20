@@ -1,4 +1,7 @@
 export function formatTime(minutes, seconds) {
+  if (minutes < 10) {
+    return `0${minutes}:${seconds}`;
+  }
   return `${minutes}:${seconds}`;
 }
 
