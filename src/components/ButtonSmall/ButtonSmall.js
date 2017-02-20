@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'deepskyblue',
     height: 50,
-    width: 200,
+    width: 95,
     marginBottom: 15,
   },
   title: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function Button(props) {
+export default function ButtonSmall(props) {
   return (
     <TouchableOpacity
       style={styles.button}

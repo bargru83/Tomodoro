@@ -2,7 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { Text, TouchableHighlight, View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import Timer from '../../components/Timer';
-import Button from '../../components/Button';
+import ButtonLarge from '../../components/ButtonLarge';
+import ButtonSmall from '../../components/ButtonSmall';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
 
@@ -40,6 +41,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
+  multiButtonWrapper: {
+    width: 200,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });
 
 class Focus extends Component {
@@ -61,10 +67,24 @@ class Focus extends Component {
         <Timer
           timeRemaining={this.props.timeRemaining}
         />
-        <Button
-          title={'Start Session'}
-          onPress={this.props.startSession}
-        />
+        {!this.props.app.sessionStarted &&
+          <ButtonLarge
+            title={'Start Session'}
+            onPress={this.props.startSession}
+          />
+        }
+        {this.props.app.sessionStarted &&
+          <View style={styles.multiButtonWrapper}>
+            <ButtonSmall
+              title={'Pause'}
+              onPress={this.props.startSession}
+            />
+            <ButtonSmall
+              title={'Cancel'}
+              onPress={this.props.startSession}
+            />
+          </View>
+        }
         <View style={styles.optionButtonsWrapper}>
           <OptionsButton
             onPress={this.props.focusToSettings}
