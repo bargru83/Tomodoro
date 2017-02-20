@@ -12,7 +12,9 @@ class FocusContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({ minutesRemaining: nextProps.app.sessionDuration });
+    if (!this.props.app.sessionStarted) {
+      this.setState({ minutesRemaining: nextProps.app.sessionDuration });
+    }
   }
 
   tick = () => {
