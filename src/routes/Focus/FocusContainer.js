@@ -43,6 +43,7 @@ class FocusContainer extends Component {
     if (this.props.app.sessionStarted) {
       this.props.dispatch(cancelSession(this.props.app.sessionsCancelled));
       clearInterval(this.session);
+      this.setState({ minutesRemaining: this.props.app.sessionDuration });
       this.setState({ secondsRemaining: '00' });
     }
   }
