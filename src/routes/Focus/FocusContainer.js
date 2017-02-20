@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Focus from './Focus';
 import { formatTime, decrementTime } from '../../lib/timeHelper';
-import { startSession, cancelSession } from '../../reducers/app/app';
+import { startSession, cancelSession, pauseSession, resumeSession } from '../../reducers/app/app';
 
 class FocusContainer extends Component {
 
@@ -16,13 +16,13 @@ class FocusContainer extends Component {
   }
 
   tick = () => {
-    console.log('tick');
-
-    const { min, sec } = decrementTime(this.state.minutesRemaining, this.state.secondsRemaining);
-    this.setState({
-      minutesRemaining: min,
-      secondsRemaining: sec,
-    });
+    if (!this.props.app.sessionPaused) {
+      const { min, sec } = decrementTime(this.state.minutesRemaining, this.state.secondsRemaining);
+      this.setState({
+        minutesRemaining: min,
+        secondsRemaining: sec,
+      });
+    }
   }
 
   startSession = () => {
@@ -41,6 +41,18 @@ class FocusContainer extends Component {
     }
   }
 
+  pauseSession = () => {
+    if (this.props.app.sessionStarted) {
+      this.props.dispatch(pauseSession());
+    }
+  }
+
+  resumeSession = () => {
+    if (this.props.app.sessionPaused) {
+      this.props.dispatch(resumeSession());
+    }
+  }
+
   render() {
     return (
       <Focus
@@ -50,6 +62,8 @@ class FocusContainer extends Component {
         timeRemaining={formatTime(this.state.minutesRemaining, this.state.secondsRemaining)}
         startSession={this.startSession}
         cancelSession={this.cancelSession}
+        pauseSession={this.pauseSession}
+        resumeSession={this.resumeSession}
       />
     );
   }

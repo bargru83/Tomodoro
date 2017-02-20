@@ -76,8 +76,8 @@ class Focus extends Component {
         {this.props.app.sessionStarted &&
           <View style={styles.multiButtonWrapper}>
             <ButtonSmall
-              title={'Pause'}
-              onPress={this.props.startSession}
+              title={this.props.app.sessionPaused ? 'Resume' : 'Pause'}
+              onPress={this.props.app.sessionPaused ? this.props.resumeSession : this.props.pauseSession}
             />
             <ButtonSmall
               title={'Cancel'}

@@ -1,5 +1,7 @@
 const START_SESSION = 'START_SESSION';
 const CANCEL_SESSION = 'CANCEL_SESSION';
+const PAUSE_SESSION = 'PAUSE_SESSION';
+const RESUME_SESSION = 'RESUME_SESSION';
 const DURATION_CHANGE_SESSION = 'DURATION_CHANGE_SESSION';
 const DURATION_CHANGE_BREAK = 'DURATION_CHANGE_BREAK';
 
@@ -13,6 +15,18 @@ export function cancelSession(sessionsCancelled) {
   return {
     type: CANCEL_SESSION,
     sessionsCancelled,
+  };
+}
+
+export function pauseSession() {
+  return {
+    type: PAUSE_SESSION,
+  };
+}
+
+export function resumeSession() {
+  return {
+    type: RESUME_SESSION,
   };
 }
 
@@ -55,7 +69,18 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         sessionStarted: false,
+        sessionPaused: false,
         sessionsCancelled: action.sessionsCancelled + 1,
+      };
+    case PAUSE_SESSION:
+      return {
+        ...state,
+        sessionPaused: true,
+      };
+    case RESUME_SESSION:
+      return {
+        ...state,
+        sessionPaused: false,
       };
     case DURATION_CHANGE_SESSION:
       return {
