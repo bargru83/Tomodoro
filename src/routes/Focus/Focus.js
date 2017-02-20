@@ -81,7 +81,7 @@ class Focus extends Component {
             />
             <ButtonSmall
               title={'Cancel'}
-              onPress={this.props.startSession}
+              onPress={this.props.cancelSession}
             />
           </View>
         }

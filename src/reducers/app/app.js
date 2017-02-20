@@ -1,10 +1,18 @@
 const START_SESSION = 'START_SESSION';
+const CANCEL_SESSION = 'CANCEL_SESSION';
 const DURATION_CHANGE_SESSION = 'DURATION_CHANGE_SESSION';
 const DURATION_CHANGE_BREAK = 'DURATION_CHANGE_BREAK';
 
 export function startSession() {
   return {
     type: START_SESSION,
+  };
+}
+
+export function cancelSession(sessionsCancelled) {
+  return {
+    type: CANCEL_SESSION,
+    sessionsCancelled,
   };
 }
 
@@ -42,6 +50,12 @@ export default function app(state = initialState, action) {
       return {
         ...state,
         sessionStarted: true,
+      };
+    case CANCEL_SESSION:
+      return {
+        ...state,
+        sessionStarted: false,
+        sessionsCancelled: action.sessionsCancelled + 1,
       };
     case DURATION_CHANGE_SESSION:
       return {

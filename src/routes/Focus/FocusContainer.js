@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Focus from './Focus';
 import { formatTime, decrementTime } from '../../lib/timeHelper';
-import { startSession } from '../../reducers/app/app';
+import { startSession, cancelSession } from '../../reducers/app/app';
 
 class FocusContainer extends Component {
 
@@ -29,7 +29,15 @@ class FocusContainer extends Component {
     if (!this.props.app.sessionStarted) {
       this.props.dispatch(startSession());
 
-      const session = setInterval(this.tick, 1000);
+      this.session = setInterval(this.tick, 1000);
+    }
+  }
+
+  cancelSession = () => {
+    if (this.props.app.sessionStarted) {
+      this.props.dispatch(cancelSession(this.props.app.sessionsCancelled));
+      clearInterval(this.session);
+      this.setState({ secondsRemaining: '00' });
     }
   }
 
@@ -41,6 +49,7 @@ class FocusContainer extends Component {
         focusToStats={this.props.focusToStats}
         timeRemaining={formatTime(this.state.minutesRemaining, this.state.secondsRemaining)}
         startSession={this.startSession}
+        cancelSession={this.cancelSession}
       />
     );
   }

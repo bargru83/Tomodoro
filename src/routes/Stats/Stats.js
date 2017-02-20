@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableHighlight, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import SceneTitle from '../../components/SceneTitle';
 import OptionsButton from '../../components/OptionsButton';
 import Stat from '../../components/Stat';
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class Settings extends Component {
+class Stats extends Component {
   render() {
     return (
       <View style={styles.sceneWrapper}>
@@ -39,16 +40,22 @@ export default class Settings extends Component {
           <SceneTitle sceneTitle={this.props.sceneTitle} />
         </View>
 
-        <Stat 
+        <Stat
           label={'Sessions Completed'}
+          output={this.props.sessionsCompleted}
+          unit={'session'}
         />
 
         <Stat
           label={'Session Time Completed'}
+          output={this.props.sessionTimeCompleted}
+          unit={'minute'}
         />
 
         <Stat
           label={'Sessions Cancelled'}
+          output={this.props.sessionsCancelled}
+          unit={'session'}
         />
 
         <View style={styles.optionButtonsWrapper}>
@@ -62,3 +69,11 @@ export default class Settings extends Component {
     );
   }
 }
+
+function mapStateToThis({ app }) {
+  return {
+    app,
+  };
+}
+
+export default connect(mapStateToThis)(Stats);

@@ -24,7 +24,7 @@ export default function Button(props) {
   return (
     <View style={styles.sliderWrapper}>
       <Text style={styles.label}>{props.label}</Text>
-      <Text style={styles.output}>Output Placeholder</Text>
+      <Text style={styles.output}>{props.output} {props.unit}{props.output === 1 ? '' : 's'}</Text>
     </View>
   );
 }
