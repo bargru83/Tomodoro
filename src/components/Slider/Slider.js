@@ -33,6 +33,7 @@ export default function Button(props) {
         step={props.step}
         onValueChange={props.onValueChange}
         onSlidingComplete={props.onSlidingComplete}
+        disabled={props.disabled}
       />
       <Text style={styles.output}>{props.val} {props.unit}{props.val === 1 ? '' : 's'}</Text>
     </View>

@@ -71,6 +71,7 @@ class Settings extends Component {
           val={this.state.sessionDuration}
           onValueChange={this.sessionDurationChanging}
           onSlidingComplete={this.sessionDurationChanged}
+          disabled={this.props.app.sessionStarted}
         />
 
         <Slider
@@ -82,6 +83,7 @@ class Settings extends Component {
           val={this.state.breakDuration}
           onValueChange={this.breakDurationChanging}
           onSlidingComplete={this.breakDurationChanged}
+          disabled={this.props.app.breakStarted}
         />
 
         <View style={styles.optionButtonsWrapper}>
