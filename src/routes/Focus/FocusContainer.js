@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Focus from './Focus';
 import { formatTime, decrementTime } from '../../lib/timeHelper';
-import { startSession, cancelSession, pauseSession, resumeSession } from '../../reducers/app/app';
+import { startSession, cancelSession, pauseSession, resumeSession, completeSession } from '../../reducers/app/app';
 
 class FocusContainer extends Component {
 
@@ -22,11 +22,15 @@ class FocusContainer extends Component {
         minutesRemaining: min,
         secondsRemaining: sec,
       });
+      if (min === '0' && sec === '00') {
+        this.completeSession();
+      }
     }
   }
 
   startSession = () => {
     if (!this.props.app.sessionStarted) {
+      this.totalDurationOfCurrentSession = this.props.app.sessionDuration;
       this.props.dispatch(startSession());
 
       this.session = setInterval(this.tick, 1000);
@@ -50,6 +54,15 @@ class FocusContainer extends Component {
   resumeSession = () => {
     if (this.props.app.sessionPaused) {
       this.props.dispatch(resumeSession());
+    }
+  }
+
+  completeSession = () => {
+    if (this.props.app.sessionStarted) {
+      clearInterval(this.session);
+      const newSessionsCompleted = this.props.app.sessionsCompleted + 1;
+      const totalSessionTimeCompleted = this.props.app.sessionTimeCompleted + this.totalDurationOfCurrentSession;
+      this.props.dispatch(completeSession(newSessionsCompleted, totalSessionTimeCompleted));
     }
   }
 
